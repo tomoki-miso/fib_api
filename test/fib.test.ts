@@ -1,4 +1,4 @@
-import { fib } from '../functions/src/app/models/fibController';
+import { fib } from '../functions/src/app/controller/fibController';
 
 describe('fib', () => {
   it('should return 0 for n=0', () => {
