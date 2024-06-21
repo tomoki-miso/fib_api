@@ -7,7 +7,7 @@ export interface Fib {
 
 //クラス
 export class FibService {
-  public async fib(n: number): Promise<Fib> {
+  public fib(n: number): Fib {
     return {
       result: fib(n),
     };
