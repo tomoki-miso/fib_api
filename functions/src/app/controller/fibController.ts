@@ -1,14 +1,23 @@
-export function fib(n: number): number {
-  if (n === 1) return 1;
+import express from 'express';
+import { FibService } from '../services/FibService';
 
-  let current = 1;
-  let next = 1;
+export default async function fibRes(
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) {
+  const service = new FibService();
+  const n = Number(req.query.n);
 
-  for (let i = 2; i < n; i++) {
-    const tmp = current + next;
-    current = next;
-    next = tmp;
+  if (!Number.isInteger(n) || n <= 0) {
+    return res.status(400).json({ status: 400, message: 'Bad Request' });
   }
 
-  return next;
+  try {
+    const result = await service.fib(n);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+    return error;
+  }
 }
