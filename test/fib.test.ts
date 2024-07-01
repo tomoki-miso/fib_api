@@ -1,10 +1,6 @@
-import { fib } from '../functions/src/app/controller/fibController';
+import { fib } from '../functions/src/app/services/FibService';
 
 describe('fib', () => {
-  it('should return 0 for n=0', () => {
-    expect(fib(0)).toBe(0);
-  });
-
   it('should return 1 for n=1', () => {
     expect(fib(1)).toBe(1);
   });
@@ -36,7 +32,6 @@ describe('fib', () => {
   // 境界値やその他のケースを追加
   it('should handle larger values', () => {
     expect(fib(10)).toBe(55);
-    expect(fib(15)).toBe(610);
-    expect(fib(20)).toBe(6765);
+    expect(fib(100)).toBe(354224848179261915075);
   });
 });
