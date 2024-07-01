@@ -1,8 +1,8 @@
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-import { FibService } from './app/services/FibService';
 import * as functions from 'firebase-functions';
+import fibRes from './app/controller/fibController';
 
 const app = express();
 app.use(helmet());
@@ -18,18 +18,7 @@ router.get(
     res: express.Response,
     next: express.NextFunction
   ) => {
-    const service = new FibService();
-    const n = Number(req.query.n);
-    if (!Number.isInteger(n) || n <= 0) {
-      return res.status(400).json({ status: 400, message: 'Bad Request' });
-    }
-    try {
-      const result = await service.fib(n);
-      return res.status(200).json(result);
-    } catch (error) {
-      next(error);
-      return;
-    }
+    return fibRes(req, res, next);
   }
 );
 
